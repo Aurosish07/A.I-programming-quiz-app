@@ -69,19 +69,19 @@
 
     <div class="quiz-question-container">
         <div class="quiz-question">
-          <h2><%= generatedQuiz %></h2>
+          <h2 id="myid"><%-content%></h2>
           <br>
           <br>
           <br>
         </div>
         <ul class="quiz-options">
-          <li>A. Berlin</li>
+          <li>A </li>
           <br>
-          <li>B. Madrid</li>
+          <li>B </li>
           <br>
-          <li>C. Paris</li>
+          <li>C</li>
           <br>
-          <li>D. Rome</li>
+          <li>D</li>
           <br>
         </ul>
 
@@ -90,6 +90,7 @@
         <input type="submit" id="submit" value="Submit"/>
       </div>
       <%- include("partials/footer.ejs") %>
+     
 </body>
 
 </html>
