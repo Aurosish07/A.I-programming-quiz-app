@@ -1,0 +1,97 @@
+<%- include("partials/header.ejs") %>
+<html>
+
+<head>
+    <style>
+ 
+ body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+.quiz-question-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  background-color: #000;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+
+}
+
+.quiz-question {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-align: center;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.quiz-options {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
+
+.quiz-options li {
+  margin: 10px 0;
+  padding: 15px;
+  background-color: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: bold;
+}
+
+.quiz-options li:hover {
+    background-color: #555;
+}
+
+#submit{
+    border-radius: 5px;
+    margin-left: 40%;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.5rem;
+    font-weight:bold;
+    width:7rem;
+    
+}
+
+    </style>
+</head>
+
+<body style="background-color: black;">
+
+
+    <div class="quiz-question-container">
+        <div class="quiz-question">
+          <h2><%= generatedQuiz %></h2>
+          <br>
+          <br>
+          <br>
+        </div>
+        <ul class="quiz-options">
+          <li>A. Berlin</li>
+          <br>
+          <li>B. Madrid</li>
+          <br>
+          <li>C. Paris</li>
+          <br>
+          <li>D. Rome</li>
+          <br>
+        </ul>
+
+        <br>
+        <br>
+        <input type="submit" id="submit" value="Submit"/>
+      </div>
+      <%- include("partials/footer.ejs") %>
+</body>
+
+</html>
+
+

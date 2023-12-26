@@ -1,0 +1,228 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+.navbar-brand{
+
+
+    font-size: 5rem;
+    
+}
+
+
+
+
+.head{
+    background-color: black;
+    color: white;
+    width:100%;
+    height: 100%rem;
+}
+  
+#inp{
+
+text-align: center;
+height:5rem;
+width:82%;
+border-radius: 10px;
+margin-left:10%;
+
+}
+
+::placeholder{
+
+    font-size: 2rem;
+    text-align:center;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    
+    
+
+}
+
+#cursor {
+    animation: blink 1s infinite;
+    font-size: 2rem;
+  }
+  
+  @keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (min-width:992px){
+    
+    #navbarNav{
+      display: flex;
+      justify-content:flex-end;
+      font-family: 'poppins',sans-serif;
+      font-weight: bold;
+      font-size: 1.2rem;
+      
+
+    }
+
+   
+
+  }
+
+@media (min-width:600px){
+
+
+#btnlan{
+
+  display: flex;
+  flex-direction:row;
+  justify-content: space-around;
+
+}
+
+
+#one,#two,#three,#four{
+
+display: flex;
+flex-direction: column;
+
+
+
+}
+}
+
+
+
+@media (max-width:602px){
+
+
+  #btnlan{
+
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+
+  
+  }
+
+  .btn{
+
+    width:7.3rem;
+    
+
+  }
+ 
+  .custom-button , .custom-button2{
+
+    width:7.3rem;
+
+  }
+  
+  
+
+}
+
+@media (max-width:450px){
+  label[for="btnradio5"]{
+    width:5rem;
+  }
+  label[for="btnradio6"]{
+    width:5rem;
+  }
+
+  label[for="btnradio7"]{
+    width:5rem;
+  }
+
+  label[for="btnradio8"]{
+    width:5rem;
+  }
+
+  label[for="btnradio9"]{
+    width:5rem;
+  }
+
+  label[for="btnradio10"]{
+    width:5rem;
+  }
+
+  label[for="btnradio11"]{
+    width:5rem;
+  }
+
+  label[for="btnradio12"]{
+    width:5rem;
+  }
+
+}
+
+
+.custom-button , .custom-button2{
+  
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color:black;
+  color:white;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.custom-button:hover {
+  background-color:white;
+  border-color: #aaa;
+  color:black;
+  
+}
+
+.custom-button.active {
+  background-color:white;
+  border:solid 4px gray;
+  color: #333;
+  outline:#e2e6ea;
+}
+
+
+
+.custom-button2:hover {
+  background-color: white;
+  border-color: #aaa;
+  color:black;
+  
+}
+
+.custom-button2.active {
+  background-color:white;
+  border:solid 4px gray;
+  color: #333;
+  outline:#e2e6ea;
+}
+
+
+#generateQuestionsBtn{
+  width:10rem;
+  height:3rem;
+  font-size: 1.5rem;
+  font-family: monospace;
+  border-color:black;
+  border-radius:5px;
+  font-weight: bold;
+}
+
+#generateQuestionsBtn:hover{
+
+
+cursor: pointer;
+
+
+
+}
+
+.footer {
+  background-color: white;
+  padding: 50px;
+  text-align: center;
+  border-top: 1px solid #ccc; 
+  color: black;
+}
