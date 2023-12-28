@@ -46,7 +46,8 @@ app.post("/submit", async (req, res) => {
         .replace("[Option 3]", "Your Option 3");
 
         
-      res.render("index.ejs", { content:responseWithOptions});
+      // res.render("index.ejs", { content:responseWithOptions});
+      console.log(responseWithOptions)
     }
 
     main();
