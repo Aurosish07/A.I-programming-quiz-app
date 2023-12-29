@@ -1,98 +1,161 @@
 <%- include("partials/header.ejs") %>
-<html>
+  <html>
 
-<head>
+  <head>
     <style>
- 
- body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #000;
-  color: #fff;
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #000;
+        color: #fff;
+      }
+
+      .quiz-question-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #fff;
+        border-radius: 10px;
+        background-color: #000;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+
+      }
+
+      .quiz-question {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        text-align: center;
+        margin-bottom: 20px;
+        color: white;
+      }
+
+      .quiz-options {
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+      }
+
+      .quiz-options li {
+        margin: 10px 0;
+        padding: 15px;
+        background-color: #333;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-family: bold;
+      }
+
+      .quiz-options li:hover {
+        background-color: #555;
+      }
+
+      #submit {
+        border-radius: 5px;
+        margin-left: 40%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 1.5rem;
+        font-weight: bold;
+        width: 7rem;
+
+      }
+
+      .quiz-options li.clicked {
+        background-color: white;
+        color: black;
+      }
+
+      .quiz-options li.correct {
+  background-color: green;
+  color: black;
 }
 
-.quiz-question-container {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #fff;
-  border-radius: 10px;
-  background-color: #000;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-
-}
-
-.quiz-question {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  text-align: center;
-  margin-bottom: 20px;
+.quiz-options li.incorrect {
+  background-color: red;
   color: white;
 }
-
-.quiz-options {
-  list-style-type: none;
-  padding: 0;
-  text-align: center;
-}
-
-.quiz-options li {
-  margin: 10px 0;
-  padding: 15px;
-  background-color: #333;
-  border-radius: 5px;
-  cursor: pointer;
-  color: white;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-family: bold;
-}
-
-.quiz-options li:hover {
-    background-color: #555;
-}
-
-#submit{
-    border-radius: 5px;
-    margin-left: 40%;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 1.5rem;
-    font-weight:bold;
-    width:7rem;
-    
-}
-
     </style>
-</head>
+  </head>
 
-<body style="background-color: black;">
+  <body style="background-color: black;">
 
 
     <div class="quiz-question-container">
-        <div class="quiz-question">
-          <h2 id="myid"><%-content%></h2>
-          <br>
-          <br>
-          <br>
-        </div>
-        <ul class="quiz-options">
-          <li>A </li>
-          <br>
-          <li>B </li>
-          <br>
-          <li>C</li>
-          <br>
-          <li>D</li>
-          <br>
-        </ul>
-
+      <div class="quiz-question">
+        <h2 id="myid"><%-question%></h2>
         <br>
         <br>
-        <input type="submit" id="submit" value="Submit"/>
+        <br>
       </div>
-      <%- include("partials/footer.ejs") %>
-     
-</body>
+      <ul class="quiz-options">
+        <li onclick="check(event , '<%= option1 %>')" class="quiz-options">A <%= option1 %>
+        </li>
+        <br>
+        <li onclick="check(event , '<%= option2 %>')" class="quiz-options">B <%= option2 %>
+        </li>
+        <br>
+        <li onclick="check(event , '<%= option3 %>')" class="quiz-options">C <%= option3 %>
+        </li>
+        <br>
+        <li onclick="check(event , '<%= option4 %>')" class="quiz-options">
+          D <%= option4 %>
+        </li>
+        <br>
+      </ul>
 
-</html>
+      <br>
+      <br>
+      <input type="submit" id="submit" value="Cheak" onclick="ck()" />
 
 
+    </div>
+    <%- include("partials/footer.ejs") %>
+
+      <script>
+        var ans;
+        var answer = '<%= ans %>';
+        var isRight = 0;
+
+        function check(event, userAns) {
+          document.querySelectorAll('.quiz-options li').forEach(item => {
+            item.classList.remove('clicked');
+          });
+
+          event.target.classList.add('clicked');
+          ans = userAns;
+
+
+
+        }
+
+        function ck() {
+
+          const options = document.querySelectorAll('.quiz-options li');
+
+
+          options.forEach(item => {
+            if (item.innerText.includes(answer)) {
+              item.classList.add('correct');
+            } else if (item.innerText.includes(ans)) {
+              item.classList.add('incorrect');
+            }
+          });
+
+
+
+          if (ans == answer) {
+            alert("true");
+            isRight = 1;
+
+          } else {
+            alert("wrong");
+            isRight = 0;
+          }
+        }
+
+
+      </script>
+
+  </body>
+
+  </html>
