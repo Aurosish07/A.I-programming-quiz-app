@@ -27,10 +27,10 @@ const openai = new OpenAI({ apiKey: 'sk-s4igVBeMtjiN4BELiaqIT3BlbkFJQ9OO1luPVCCG
 app.post("/submit", async (req, res) => {
 
   let btnradio = req.body.btnradio;
-  let btnradio1 = req.body.btnradio1;
+  // let btnradio1 = req.body.btnradio1;
   let btnradio2 = req.body.btnradio2;
 
-  const prompt = "Ask me a question on" + btnradio + " which is a " + btnradio1 + " question with " + btnradio2 + " level with answer";
+  const prompt = `Ask me a multiple-choice question on ${btnradio} with ${btnradio2} level where options should be in an array, and there should be an option that exactly matches the answer, including symbols and spaces. If the question contains any code snippet, please include it in your response.`;
   try {
 
     const completion = await openai.chat.completions.create({
@@ -38,6 +38,7 @@ app.post("/submit", async (req, res) => {
         {
           role: "system",
           content: "You are a helpful assistant designed to output JSON.",
+          
         },
         { role: "user", content: prompt },
       ],
