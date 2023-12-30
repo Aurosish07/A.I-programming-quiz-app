@@ -27,29 +27,32 @@ const openai = new OpenAI({ apiKey: 'sk-s4igVBeMtjiN4BELiaqIT3BlbkFJQ9OO1luPVCCG
 app.post("/submit", async (req, res) => {
 
   let btnradio = req.body.btnradio;
-  let btnradio1 = req.body.btnradio1;
+  // let btnradio1 = req.body.btnradio1;
   let btnradio2 = req.body.btnradio2;
 
-  const prompt = "Ask me a question on" + btnradio + " which is a " + btnradio1 + " question with " + btnradio2 + " level ";
+  const prompt = `Ask me a multiple-choice question on ${btnradio} with ${btnradio2} level where options should be in an array, and there should be an option that exactly matches the answer and there should only one correct answer of every question, including symbols and spaces. If the question contains any code snippet, please include it in your response.`;
   try {
 
-    async function main() {
-      const completion = await openai.chat.completions.create({
-        messages: [{ role: "system", content: prompt }],
-        model: "gpt-3.5-turbo",
-      });
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content: "You are a helpful assistant designed to output JSON.",
+          
+        },
+        { role: "user", content: prompt },
+      ],
+      model: "gpt-3.5-turbo-1106",
+      response_format: { type: "json_object" },
+    });
 
+    let result = completion.choices[0].message.content;
+    let obj = JSON.parse(result);
+    let code;
 
-      const resp = completion.choices[0];
-      const responseWithOptions = resp.message.content.replace("[Option 1]", "Your Option 1")
-        .replace("[Option 2]", "Your Option 2")
-        .replace("[Option 3]", "Your Option 3");
+    res.render("index.ejs" , {question:obj.question , option1:obj.options[0], option2:obj.options[1] , option3:obj.options[2] , option4:obj.options[3] , ans:obj.answer , code:obj.code})
+   console.log(obj)
 
-        
-      res.render("index.ejs", { content:responseWithOptions});
-    }
-
-    main();
 
   } catch (error) {
     console.error(error.messages);
