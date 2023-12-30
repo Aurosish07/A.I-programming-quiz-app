@@ -3,6 +3,8 @@
 
   <head>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+
       body {
         margin: 0;
         padding: 0;
@@ -23,7 +25,7 @@
       }
 
       .quiz-question {
-        font-family: sans-serif;
+        font-family: 'poppins', sans-serif;
         text-align: center;
         margin-bottom: 20px;
         color: white;
@@ -42,8 +44,9 @@
         border-radius: 5px;
         cursor: pointer;
         color: white;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-family: 'poppins', sans-serif;
         font-family: bold;
+        font-size: 1.3rem;
       }
 
       .quiz-options li:hover {
@@ -53,7 +56,7 @@
       #submit {
         border-radius: 5px;
         margin-left: 40%;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-family: 'poppins', sans-serif;
         font-size: 1.5rem;
         font-weight: bold;
         width: 7rem;
@@ -79,38 +82,47 @@
 
   <body style="background-color: black;">
 
-
-    <div class="quiz-question-container">
-      <div class="quiz-question">
+    <form method="post" action="/submit">
+      
+      
+      <div class="quiz-question-container">
+        <div class="quiz-question">
         <h2 id="myid"><%-question%></h2>
         <br>
+        <pre><%= locals.code %></pre>
         <br>
         <br>
       </div>
       <ul class="quiz-options">
-        <li onclick="check(event , '<%= option1 %>')" class="quiz-options">A <%= option1 %>
+        <li onclick="check(event , '<%= option1 %>')" class="quiz-options">
+          <%= option1 %>
         </li>
         <br>
-        <li onclick="check(event , '<%= option2 %>')" class="quiz-options">B <%= option2 %>
+        <li onclick="check(event , '<%= option2 %>')" class="quiz-options">
+          <%= option2 %>
         </li>
         <br>
-        <li onclick="check(event , '<%= option3 %>')" class="quiz-options">C <%= option3 %>
+        <li onclick="check(event , '<%= option3 %>')" class="quiz-options">
+          <%= option3 %>
         </li>
         <br>
         <li onclick="check(event , '<%= option4 %>')" class="quiz-options">
-          D <%= option4 %>
+          <%= option4 %>
         </li>
         <br>
       </ul>
-
+      
       <br>
       <br>
+      
       <input type="submit" id="submit" value="Cheak" onclick="ck()" />
-
-
+      
+      
     </div>
+  </form>
     <%- include("partials/footer.ejs") %>
 
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
         var ans;
         var answer = '<%= ans %>';
@@ -142,10 +154,22 @@
           const selectedOption = document.querySelector('.quiz-options li.clicked');
 
           if (selectedOption) {
-            if (ans == answer) {
+            const userAnswer = selectedOption.innerText.trim();
+            if (userAnswer === answer) {
+              Swal.fire({
+                title: "Good job!",
+                text: "You answer is correct!",
+                icon: "success"
+              });
+              // document.getElementById("submit").
               selectedOption.classList.add('correct');
               console.log("correct");
             } else {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Your answer is wrong"
+              });
               selectedOption.classList.add('incorrect');
               console.log("wrong");
             }
