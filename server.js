@@ -30,7 +30,7 @@ app.post("/submit", async (req, res) => {
   // let btnradio1 = req.body.btnradio1;
   let btnradio2 = req.body.btnradio2;
 
-  const prompt = `Ask me a multiple-choice question on ${btnradio} with ${btnradio2} level where options should be in an array, and there should be an option that exactly matches the answer and there should only one correct answer of every question, including symbols and spaces. If the question contains any code snippet, please include it in your response.`;
+  const prompt = `Ask me a multiple-choice question on ${btnradio} with ${btnradio2} level where options should be in an array, and there should be an option that exactly matches the answer including symbols and spaces and there should only one correct answer of every question . If the question contains any code snippet, please include it in your response only in 'code' header.`;
   try {
 
     const completion = await openai.chat.completions.create({
@@ -49,9 +49,14 @@ app.post("/submit", async (req, res) => {
     let result = completion.choices[0].message.content;
     let obj = JSON.parse(result);
     let code;
+    
+    res.render("index.ejs" , {question:obj.question , option1:obj.options[0], option2:obj.options[1] , option3:obj.options[2] , option4:obj.options[3] , ans:obj.answer , code:obj.code , code:obj.code.content , body:req.body});
+    console.log(obj);
+    console.log(obj.btnradio);
+    console.log(obj.btnradio2);
+    console.log(prompt);
 
-    res.render("index.ejs" , {question:obj.question , option1:obj.options[0], option2:obj.options[1] , option3:obj.options[2] , option4:obj.options[3] , ans:obj.answer , code:obj.code})
-   console.log(obj)
+
 
 
   } catch (error) {

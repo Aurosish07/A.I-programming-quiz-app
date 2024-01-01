@@ -53,7 +53,7 @@
         background-color: #555;
       }
 
-      #submit {
+      .submit {
         border-radius: 5px;
         margin-left: 40%;
         font-family: 'poppins', sans-serif;
@@ -82,7 +82,7 @@
 
   <body style="background-color: black;">
 
-    <form method="post" action="/submit">
+    
       
       
       <div class="quiz-question-container">
@@ -115,11 +115,13 @@
       <br>
       <br>
       
-      <input type="submit" id="submit" value="Cheak" onclick="ck()" />
+      <input type="submit" id="submit" value="Cheak" class="submit" onclick="ck()" />
+
+      <div id="Next"></div>
       
       
     </div>
-  </form>
+ 
     <%- include("partials/footer.ejs") %>
 
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -127,6 +129,7 @@
         var ans;
         var answer = '<%= ans %>';
         var isRight = 0;
+        var body = '<%=body%>';
 
         function check(event, userAns) {
           document.querySelectorAll('.quiz-options li').forEach(item => {
@@ -161,7 +164,7 @@
                 text: "You answer is correct!",
                 icon: "success"
               });
-              // document.getElementById("submit").
+              
               selectedOption.classList.add('correct');
               console.log("correct");
             } else {
@@ -174,6 +177,25 @@
               console.log("wrong");
             }
           }
+          let submit = document.querySelector("#submit");
+          let newBtn = document.querySelector("#Next");
+
+          submit.remove();
+
+          let New = document.createElement("input");
+          New.setAttribute("class" , "submit");
+          New.setAttribute("type" , "submit");
+          New.setAttribute("value" , "Next");
+          New.setAttribute("onclick" , "Next()");
+
+          newBtn.appendChild(New);
+
+
+
+        }
+
+        function Next(){
+          location.reload(1);
         }
 
 
