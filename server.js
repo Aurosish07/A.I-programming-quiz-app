@@ -4,6 +4,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import axios from "axios"
 import OpenAI from "openai";
+import 'dotenv/config';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -22,7 +23,7 @@ app.get("/", (req, res) => {
 
 
 
-const openai = new OpenAI({ apiKey: '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' });
+const openai = new OpenAI({ apiKey: `${process.env.OPENAI_API_KEY}` });
 
 app.post("/submit", async (req, res) => {
 
@@ -38,7 +39,7 @@ app.post("/submit", async (req, res) => {
         {
           role: "system",
           content: "You are a helpful assistant designed to output JSON.",
-          
+
         },
         { role: "user", content: prompt },
       ],
@@ -48,13 +49,14 @@ app.post("/submit", async (req, res) => {
 
     let result = completion.choices[0].message.content;
     let obj = JSON.parse(result);
-    let code;
-    
-    res.render("index.ejs" , {question:obj.question , option1:obj.options[0], option2:obj.options[1] , option3:obj.options[2] , option4:obj.options[3] , ans:obj.answer , code:obj.code , code:obj.code.content , body:req.body});
-    console.log(obj);
-    console.log(obj.btnradio);
-    console.log(obj.btnradio2);
+    let code = obj.code;
+
+    res.render("index.ejs", { question: obj.question, option1: obj.options[0], option2: obj.options[1], option3: obj.options[2], option4: obj.options[3], ans: obj.answer, code: code, body: req.body });
+
     console.log(prompt);
+    console.log(result);
+    console.log(obj);
+
 
 
 
@@ -79,4 +81,4 @@ app.listen(port, () => {
 
 
 
-//   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
+//new key : - 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

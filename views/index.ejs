@@ -77,6 +77,12 @@
         background-color: red;
         color: white;
       }
+
+      pre{
+        font-size: 1.6rem;
+        border:solid 2px white;
+        border-radius:5px;
+      }
     </style>
   </head>
 
@@ -88,6 +94,7 @@
       <div class="quiz-question-container">
         <div class="quiz-question">
         <h2 id="myid"><%-question%></h2>
+        <br>
         <br>
         <pre><%= locals.code %></pre>
         <br>
